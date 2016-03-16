@@ -1,0 +1,155 @@
+﻿<Page
+    x:Class="CrossPlatformUniversalApp.Sample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CrossPlatformUniversalApp.Sample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Setup">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Name="uxGridOperation" Grid.Column="0">
+            <Pivot>
+                <PivotItem Header="Transacionar">
+                    <Grid Name="uxGridTransactionInformation">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Name="uxGridTransactionConfig" Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Name="uxTbkTransaction" Grid.Row="0" Text="Tipo de Transação:" />
+                                <ComboBox Name="uxCbbxTransactionType" Grid.Row="1">
+                                    <ComboBoxItem Name="uxCbxItemCredit" Content="Crédito"/>
+                                <ComboBoxItem Name="uxCbxItemDebit" Content="Débito"/>
+                                </ComboBox>
+
+                                <TextBlock Name="uxTbkInstallmentNumber" Grid.Row="2" Text="Parcelas:" />
+                                <!--TODO: Restringir input para apenas números.-->
+                                <TextBox Name="uxTbxInstallmentNumber" Grid.Row="3" InputScope="Number" />
+
+                                <ToggleSwitch Name="uxTggInstallmentType" Grid.Row="4" Header="Tipo de parcelamento:" OffContent="Sem juros" OnContent="Com juros"/>
+
+                                <TextBlock Name="uxTbkAmount" Grid.Row="5" Text="Valor da transação:" />
+                                <!--TODO: Restringir input para apenas currency.-->
+                                <TextBox Name="uxTbxAmount" Grid.Row="6" />
+
+                                <TextBlock Name="uxTbkTransactionId" Grid.Row="7" Text="ID da transação:" />
+                                <TextBox Name="uxTbxTransactionId" Grid.Row="8" MaxLength="100" />
+
+                            <Button Name="uxBtnTransaction" Grid.Row="9" Content="Enviar transação" Click="InitiateTransaction"/>
+                            <Button Name="uxBtnCancelTransaction" Grid.Row="10" Content="Cancelar transação" Click="CancelTransaction"/>
+                            </Grid>
+                            <Grid Name="uxGridTransactionList" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.05*"/>
+                                    <RowDefinition Height="0.95*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Name="uxTbkTransactionList" Grid.Row="0" Text="Transações:" />
+                            <ListView Name="uxLvwTransactionList" Grid.Row="1" Background="Silver" SelectionChanged="OnTransactionSelected"/>
+                            </Grid>
+                        </Grid>
+                </PivotItem>
+                <PivotItem Header="Pinpad">
+                    <Grid Name="uxGrindPinpad">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Name="uxTbkPinpadInstruction" Grid.Row="0" Text="Envia uma mensagem para a tela do pinpad. O pinpad suporta duas mensagens, cada uma com no máximo 16 caracteres." />
+                        <TextBlock Name="uxTbkMessageFirstRow" Grid.Row="1" Text="Linha 1" />
+                        <TextBox Name="uxTbxFirstRow" Grid.Row="2"/>
+                        <TextBlock Name="uxTbkMessageSecondRow" Grid.Row="3" Text="Linha 2" />
+                        <TextBox Name="uxTbxSecondRow" Grid.Row="4"/>
+                        <TextBlock Name="uxTbkAligment" Grid.Row="5" Text="Alinhamento"/>
+                        <ComboBox Name="uxCbxAligment" Grid.Row="6">
+                            <ComboBoxItem Name="uxCbxItemLeft" Content="Esquerda" />
+                            <ComboBoxItem Name="uxCbxItemCenter" Content="Centro" />
+                            <ComboBoxItem Name="uxCbxItemRight" Content="Direita" />
+                        </ComboBox>
+                        <CheckBox Name="uxChxWaitKey" Grid.Row="7" Content="Esperar por tecla?" />
+                        <Button Name="uxBtnSendMessage" Grid.Row="8" Content="Enviar" Click="ShowPinpadLabel"/>
+                    </Grid>
+                </PivotItem>
+                <PivotItem Header="Outros">
+                    <Grid Name="uxGridOtherConfig">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Name="uxGridOtherPing" Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="uxTbxPing" Grid.Column="0" Text="Ping para o Pinpad:" />
+                            <Button Name="uxBtnPing" Grid.Column="1" Content="Ping!" Click="PingPinpad" />
+                        </Grid>
+                        <Grid Name="uxGridOtherReconect" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Name="uxSplReconect" Grid.Column="0">
+                                <TextBlock Name="uxTbxReconect" Text="Reconectar:" />
+                                <TextBlock Name="uxTbxReconectHint" Text="As vezes é necessário refazer o processo de conexão." />
+                            </StackPanel>
+                            <Button Name="uxBtnReconect" Grid.Column="1" Content="Reconectar" Click="Reconnect"/>
+                        </Grid>
+                        <Grid Name="uxGridOtherPan" Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Name="uxSplPan" Grid.Column="0">
+                                <TextBlock Name="uxTbxPan" Text="Capturar PAN:" />
+                                <TextBlock Name="uxTbxPanHint" Text="Usado para fazer cancelamento com cartão presencial." />
+                            </StackPanel>
+                            <Button Name="uxBtnPan" Grid.Column="1" Content="Capturar PAN" Click="GetPan"/>
+                        </Grid>
+                        <Grid Name="uxGridOtherTable" Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="uxTbxTable" Grid.Column="0" Text="Download de tabelas:" />
+                            <Button Name="uxBtnTable" Grid.Column="1" Content="Download" Click="DownloadTables"/>
+                        </Grid>
+                    </Grid>
+                </PivotItem>
+            </Pivot>
+        </Grid>
+        <Grid Name="uxGridLog" Grid.Column="1">
+            <ListView Name="uxLvwLog" Background="LightGray"/>
+        </Grid>
+    </Grid>
+</Page>
