@@ -91,7 +91,39 @@ namespace CrossPlatform.Uwp.AlternativeSample
             do
             {
                 readingStatus = this.authorizer.ReadCard(out cardRead, transaction);
-            } while (readingStatus != ResponseStatus.Ok);
+            }
+            while (readingStatus != ResponseStatus.Ok);
+
+            if (cardRead.Type == CardType.MagneticStripe)
+            {
+                transaction.Type = GetTransactionTypeFromMagneticStripe(cardRead);
+            }
+        }
+        /// <summary>
+        /// Wait input for define transaction type.
+        /// </summary>
+        /// <param name="card">Card read</param>
+        /// <returns>TransactionType with Credit or Debit value.</returns>
+        private TransactionType GetTransactionTypeFromMagneticStripe(ICard card)
+        {
+            PinpadKeyCode key;
+            do
+            {
+                this.authorizer.PinpadController.Display.ShowMessage("Tecla ENTER-deb", "Tecla Limpa-cred", DisplayPaddingType.Center);
+                key = this.authorizer.PinpadController.Keyboard.GetKey();
+            }
+            while (key != PinpadKeyCode.Backspace && key != PinpadKeyCode.Return);
+
+            if (key == PinpadKeyCode.Return)
+            {
+                return TransactionType.Debit;
+            }
+            else if (key == PinpadKeyCode.Backspace)
+            {
+                return TransactionType.Credit;
+            }
+
+            return TransactionType.Undefined;
         }
         /// <summary>
         /// Reads the card password.
