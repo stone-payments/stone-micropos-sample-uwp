@@ -340,7 +340,15 @@ namespace CrossPlatformUniversalApp.Sample
         /// <param name="e">Click event arguments.</param>
         private void DownloadTables(object sender, RoutedEventArgs e)
         {
-            this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { this.Log("Funcionalidade indisponivel."); }).AsTask();
+            bool success = this.authorizer.UpdateTables(1, false);
+            if (success == true)
+            {
+                this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { this.Log("Tabelas atualizadas com sucesso."); }).AsTask();
+            }
+            else
+            {
+                this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { this.Log("Erro ao atualizar as tabelas."); }).AsTask();
+            }
         }
     }
 }
