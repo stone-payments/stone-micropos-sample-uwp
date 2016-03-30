@@ -1,6 +1,7 @@
 ﻿using MicroPos.Core;
 using MicroPos.Core.Authorization;
 using Pinpad.Sdk.Connection;
+using Pinpad.Sdk.Model.Exceptions;
 using Pinpad.Sdk.Model.TypeCode;
 using Poi.Sdk;
 using Poi.Sdk.Authorization;
@@ -120,7 +121,24 @@ namespace CrossPlatformUniversalApp.Sample
             ICard card;
 
             // Envia para o autorizador:
-            PoiResponseBase poiResponse = this.authorizer.Authorize(transaction, out card);
+            PoiResponseBase poiResponse = null;
+
+            try
+            {
+                poiResponse = this.authorizer.Authorize(transaction, out card);
+            }
+            catch (ExpiredCardException)
+            {
+                this.Log("Card Expired");
+                this.authorizer.PromptForCardRemoval("CARTAO EXPIRADO");
+                return;
+            }
+
+            if (poiResponse == null)
+            {
+                this.Log("Um erro ocorreu durante a transação.");
+                return;
+            }
 
             if (poiResponse == null)
             {
