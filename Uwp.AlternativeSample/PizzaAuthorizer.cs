@@ -63,6 +63,7 @@ namespace CrossPlatform.Uwp.AlternativeSample
 
             // Establishes connection with the pinpad.
             CrossPlatformUniversalApp.CrossPlatformUniversalAppInitializer.Initialize();
+            
             this.authorizer = new CardPaymentAuthorizer(this.SaleAffiliationKey, this.AuthorizationUri, this.ManagementUri, null, this.PizzaMachineMessages);
 
             // Attach event to read all transaction status:

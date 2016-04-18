@@ -37,23 +37,23 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Name="uxTbkTransaction" Grid.Row="0" Text="Tipo de Transação:" />
+                            <TextBlock Name="uxTbkTransaction" Grid.Row="0" Text="Tipo de Transação:" VerticalAlignment="Center"/>
                                 <ComboBox Name="uxCbbxTransactionType" Grid.Row="1">
                                     <ComboBoxItem Name="uxCbxItemCredit" Content="Crédito"/>
                                 <ComboBoxItem Name="uxCbxItemDebit" Content="Débito"/>
                                 </ComboBox>
 
-                                <TextBlock Name="uxTbkInstallmentNumber" Grid.Row="2" Text="Parcelas:" />
+                            <TextBlock Name="uxTbkInstallmentNumber" Grid.Row="2" Text="Parcelas:" VerticalAlignment="Center"/>
                                 <!--TODO: Restringir input para apenas números.-->
                                 <TextBox Name="uxTbxInstallmentNumber" Grid.Row="3" InputScope="Number" />
 
                                 <ToggleSwitch Name="uxTggInstallmentType" Grid.Row="4" Header="Tipo de parcelamento:" OffContent="Sem juros" OnContent="Com juros"/>
 
-                                <TextBlock Name="uxTbkAmount" Grid.Row="5" Text="Valor da transação:" />
+                            <TextBlock Name="uxTbkAmount" Grid.Row="5" Text="Valor da transação:" VerticalAlignment="Center"/>
                                 <!--TODO: Restringir input para apenas currency.-->
                                 <TextBox Name="uxTbxAmount" Grid.Row="6" />
 
-                                <TextBlock Name="uxTbkTransactionId" Grid.Row="7" Text="ID da transação:" />
+                            <TextBlock Name="uxTbkTransactionId" Grid.Row="7" Text="ID da transação:" VerticalAlignment="Center"/>
                                 <TextBox Name="uxTbxTransactionId" Grid.Row="8" MaxLength="100" />
 
                             <Button Name="uxBtnTransaction" Grid.Row="9" Content="Enviar transação" Click="InitiateTransaction"/>
@@ -84,11 +84,11 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <TextBlock Name="uxTbkPinpadInstruction" Grid.Row="0" Text="Envia uma mensagem para a tela do pinpad. O pinpad suporta duas mensagens, cada uma com no máximo 16 caracteres." />
-                        <TextBlock Name="uxTbkMessageFirstRow" Grid.Row="1" Text="Linha 1" />
+                        <TextBlock Name="uxTbkMessageFirstRow" Grid.Row="1" Text="Linha 1" VerticalAlignment="Center"/>
                         <TextBox Name="uxTbxFirstRow" Grid.Row="2"/>
-                        <TextBlock Name="uxTbkMessageSecondRow" Grid.Row="3" Text="Linha 2" />
+                        <TextBlock Name="uxTbkMessageSecondRow" Grid.Row="3" Text="Linha 2" VerticalAlignment="Center"/>
                         <TextBox Name="uxTbxSecondRow" Grid.Row="4"/>
-                        <TextBlock Name="uxTbkAligment" Grid.Row="5" Text="Alinhamento"/>
+                        <TextBlock Name="uxTbkAligment" Grid.Row="5" Text="Alinhamento" VerticalAlignment="Center"/>
                         <ComboBox Name="uxCbxAligment" Grid.Row="6">
                             <ComboBoxItem Name="uxCbxItemLeft" Content="Esquerda" />
                             <ComboBoxItem Name="uxCbxItemCenter" Content="Centro" />
@@ -111,7 +111,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Name="uxTbxPing" Grid.Column="0" Text="Ping para o Pinpad:" />
+                            <TextBlock Name="uxTbxPing" Grid.Column="0" Text="Ping para o Pinpad:" VerticalAlignment="Center" />
                             <Button Name="uxBtnPing" Grid.Column="1" Content="Ping!" Click="PingPinpad" />
                         </Grid>
                         <Grid Name="uxGridOtherReconect" Grid.Row="1">
@@ -119,8 +119,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Name="uxSplReconect" Grid.Column="0">
-                                <TextBlock Name="uxTbxReconect" Text="Reconectar:" />
+                            <StackPanel Name="uxSplReconect" Grid.Column="0" VerticalAlignment="Center">
+                                <TextBlock Name="uxTbxReconect" Text="Reconectar:" VerticalAlignment="Center"/>
                                 <TextBlock Name="uxTbxReconectHint" Text="As vezes é necessário refazer o processo de conexão." />
                             </StackPanel>
                             <Button Name="uxBtnReconect" Grid.Column="1" Content="Reconectar" Click="Reconnect"/>
@@ -130,7 +130,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Name="uxSplPan" Grid.Column="0">
+                            <StackPanel Name="uxSplPan" Grid.Column="0" VerticalAlignment="Center">
                                 <TextBlock Name="uxTbxPan" Text="Capturar PAN:" />
                                 <TextBlock Name="uxTbxPanHint" Text="Usado para fazer cancelamento com cartão presencial." />
                             </StackPanel>
@@ -141,7 +141,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Name="uxTbxTable" Grid.Column="0" Text="Download de tabelas:" />
+                            <TextBlock Name="uxTbxTable" Grid.Column="0" Text="Download de tabelas:" VerticalAlignment="Center" />
                             <Button Name="uxBtnTable" Grid.Column="1" Content="Download" Click="DownloadTables"/>
                         </Grid>
                     </Grid>
@@ -149,7 +149,23 @@
             </Pivot>
         </Grid>
         <Grid Name="uxGridLog" Grid.Column="1">
-            <ListView Name="uxLvwLog" Background="LightGray"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.05*"/>
+                <RowDefinition Height="0.95*"/>
+            </Grid.RowDefinitions>
+            <Grid Name="uxGridPinpads" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.20*"/>
+                    <ColumnDefinition Width="0.60*"/>
+                    <ColumnDefinition Width="0.20*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Name="uxTbxPinpads" Grid.Column="0" Text="Pinpads:" VerticalAlignment="Center"/>
+                <ComboBox Name="uxCbbxPinpads" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <Button Name="uxBtnPinpads" Grid.Column="2" Content="Usar" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="ChangeAuthorizer"/>
+            </Grid>
+            <Grid Name="uxGridLvwLog" Grid.Row="1">
+                <ListView Name="uxLvwLog" Background="LightGray"/>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

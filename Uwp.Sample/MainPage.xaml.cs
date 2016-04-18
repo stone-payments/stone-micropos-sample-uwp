@@ -61,13 +61,22 @@ namespace CrossPlatformUniversalApp.Sample
             pinpadMessages.ProcessingMessage = "Processando...";
 
             this.approvedTransactions = new Collection<TransactionModel>();
+            this.authorizers = new Dictionary<string, CardPaymentAuthorizer>();
 
             // Inicializa o autorizador
-            this.authorizer = new CardPaymentAuthorizer(this.sak, this.authorizationUri, this.tmsUri, null, pinpadMessages);
+            //this.authorizer = new CardPaymentAuthorizer(this.sak, this.authorizationUri, this.tmsUri, null, pinpadMessages);
+
+            CardPaymentAuthorizer.GetAllDevices(this.sak, this.authorizationUri, this.tmsUri, pinpadMessages).ToList()
+                .ForEach(x => this.authorizers.Add(x.PinpadController.Infos.ManufacturerName + x.PinpadController.Infos.Model, x));
+
+            this.authorizer = this.authorizers.FirstOrDefault().Value;
+
             Debug.WriteLine("Command OPN");
             this.authorizer.OnStateChanged += this.OnTransactionStateChange;
 
             this.uxBtnCancelTransaction.IsEnabled = false;
+            this.uxCbbxPinpads.ItemsSource = this.authorizers.Keys;
+            this.uxCbbxPinpads.SelectedValue = this.authorizer.PinpadController.Infos.ManufacturerName + this.authorizer.PinpadController.Infos.Model;
         }
         /// <summary>
         /// Perform an authorization process.
@@ -349,6 +358,18 @@ namespace CrossPlatformUniversalApp.Sample
             {
                 this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { this.Log("Erro ao atualizar as tabelas."); }).AsTask();
             }
+        }
+        /// <summary>
+        /// Selected other pinpad and change authorizer.
+        /// </summary>
+        /// <param name="sender">uxBtnPinpads</param>
+        /// <param name="e">Click envent arguments.</param>
+        private void ChangeAuthorizer(object sender, RoutedEventArgs e)
+        {
+            string selectedPinpad = this.uxCbbxPinpads.SelectedValue.ToString();
+            this.authorizer = this.authorizers[selectedPinpad];
+
+            this.Log("Pinpad em uso: " + selectedPinpad);
         }
     }
 }

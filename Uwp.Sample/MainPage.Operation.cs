@@ -17,6 +17,7 @@ namespace CrossPlatformUniversalApp.Sample
     {
         // Members
         internal CardPaymentAuthorizer authorizer;
+        internal IDictionary<string, CardPaymentAuthorizer> authorizers;
         private Collection<TransactionModel> approvedTransactions;
 
 //#if DEBUG
