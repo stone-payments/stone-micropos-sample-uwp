@@ -40,7 +40,7 @@
                             <TextBlock Name="uxTbkTransaction" Grid.Row="0" Text="Tipo de Transação:" VerticalAlignment="Center"/>
                                 <ComboBox Name="uxCbbxTransactionType" Grid.Row="1">
                                     <ComboBoxItem Name="uxCbxItemCredit" Content="Crédito"/>
-                                <ComboBoxItem Name="uxCbxItemDebit" Content="Débito"/>
+                                    <ComboBoxItem Name="uxCbxItemDebit" Content="Débito"/>
                                 </ComboBox>
 
                             <TextBlock Name="uxTbkInstallmentNumber" Grid.Row="2" Text="Parcelas:" VerticalAlignment="Center"/>

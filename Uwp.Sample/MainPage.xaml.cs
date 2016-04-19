@@ -105,7 +105,15 @@ namespace CrossPlatformUniversalApp.Sample
                 transactionType = TransactionType.Credit;
 
                 // Cria o parcelamento:
-                installment.Number = Int16.Parse(this.uxTbxInstallmentNumber.Text);
+                if (this.uxTbxInstallmentNumber.Text == string.Empty)
+                {
+                    installment.Number = 1;
+                }
+                else
+                {
+                    installment.Number = Int16.Parse(this.uxTbxInstallmentNumber.Text);
+                }
+                
                 installment.Type = (this.uxTggInstallmentType.IsOn == true) ? InstallmentType.Issuer : InstallmentType.Merchant;
             }
             else
