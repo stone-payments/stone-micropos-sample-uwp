@@ -35,7 +35,7 @@ namespace CrossPlatform.Uwp.AlternativeSample
         /// <summary>
         /// SAK. 
         /// </summary>
-        public string SaleAffiliationKey { get { return "***REMOVED***"; } }
+        public string SaleAffiliationKey { get { return ""; } }
         /// <summary>
         /// Stone Point Of Interaction server URI.
         /// </summary>

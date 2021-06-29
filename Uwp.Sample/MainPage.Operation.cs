@@ -21,13 +21,13 @@ namespace CrossPlatformUniversalApp.Sample
         private Collection<TransactionModel> approvedTransactions;
 
 //#if DEBUG
-//        private string sak = "***REMOVED***";
-//        private string authorizationUri = "https://poistaging.stone.com.br";
-//        private string tmsUri = "https://tmsstaging.stone.com.br/";
+//        private string sak = "";
+//        private string authorizationUri = "";
+//        private string tmsUri = "";
 //#else
-		private string sak = "***REMOVED***";
-		private string authorizationUri = "https://pos.stone.com.br/";
-		private string tmsUri = "https://tmsproxy.stone.com.br";
+		private string sak = "";
+		private string authorizationUri = "";
+		private string tmsUri = "";
 //#endif
 
         // Methods
